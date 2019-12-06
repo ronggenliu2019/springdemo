@@ -1,0 +1,53 @@
+management:
+  endpoints:
+    web:
+      base-path: /manage
+      exposure:
+        include: "*"
+    health:
+      show-details: "always"
+    shutdown:
+      enabled: true
+#    enabled-by-default: true
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring_social?useSSL=false
+    username: gary
+    password: L1rg2&Hz
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: b2d011ffd18e0797ce89
+            clientSecret: b34ca0a3b2ae3a98ab6c44c0763b4b1c5db7edcf
+            redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - user:email
+              - read:user
+    user:
+      name: admin
+      password: admin
+      roles: ACTUATOR_ADMIN
+
+app:
+  auth:
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+    tokenExpirationMsec: 864000000
+    oauth2:
+      authrizedRedirectUris:
+        - http://localhost:3000/oauth2/redirect
+        - myandroidapp://oauth2/redirect
+        - myiosapp://oauth2/redirect
